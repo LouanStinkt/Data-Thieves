@@ -1,11 +1,5 @@
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -20,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -34,6 +29,7 @@ fun App() {
         Screen()
     }
 }
+
 
 @Composable
 @Preview
@@ -58,6 +54,10 @@ fun Screen() {
             val currentMoney: Gelds? by remember(gameState) {
                 derivedStateOf { gameState?.stashedMoney }
             }
+
+
+
+
 
 
 
@@ -98,7 +98,8 @@ fun Screen() {
                         style = MaterialTheme.typography.h4,
                     )
                     Button(
-                        onClick = { viewModel.clickMoney(state) }
+                        onClick = { viewModel.clickMoney(state) },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray, contentColor = Color.White)
                     ) {
                         Text("Collect Data")
                     }
@@ -117,6 +118,10 @@ fun Screen() {
     )
 }
 
+fun Button(onClick: () -> Unit, colors: ButtonColors, contentColor: Color) {
+
+}
+
 @Composable
 private fun Generator(
     gameJob: GameJob,
@@ -129,10 +134,10 @@ private fun Generator(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
             .padding(8.dp)
-            .background(Color.LightGray, RoundedCornerShape(8.dp))
+            .background(Color(102, 153, 153), RoundedCornerShape(8.dp))
             .padding(8.dp)
     ) {
-        Column {
+        Column{
             Text("Auto Clicker ${gameJob.id}")
             Text("Level: ${gameJob.level.level}")
             Text("Cost: ${gameJob.level.cost.toHumanReadableString()} Data")
@@ -141,12 +146,16 @@ private fun Generator(
         }
         if (!alreadyBought) {
             Button(onClick = onBuy) {
-                Text("Buy")
+                Text("Purchase")
             }
         } else {
-            Text("Bought")
+            Text("Purchased")
         }
-        Button(onClick = onUpgrade) {
+        Button(
+            onClick = onUpgrade,
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color (0, 255, 0),
+            contentColor = Color.White)
+        ) {
             Text("Upgrade")
         }
     }
