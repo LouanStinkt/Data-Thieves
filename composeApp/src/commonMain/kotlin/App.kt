@@ -107,12 +107,13 @@ fun Screen() {
                 gameState?.let { state ->
                     Text(
                         "Data Bank: ${currentMoney?.toHumanReadableString()} Data",
-                        style = MaterialTheme.typography.h4,
+                        style = MaterialTheme.typography.h4, color = Color.Green
                     )
                     Button(
                         onClick = { viewModel.clickMoney(state) },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray, contentColor = Color.White))
-                        {
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray, contentColor = Color.White),
+                        modifier = Modifier.offset(x = 600.dp, y = 0.dp))
+                    {
                         Text("Collect Data",
                             modifier = Modifier.offset(
                                 x = 5.dp, y = 50.dp
