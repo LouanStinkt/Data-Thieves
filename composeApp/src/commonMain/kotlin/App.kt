@@ -1,3 +1,4 @@
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,8 +16,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import idle_game.composeapp.generated.resources.Backrgou
+import idle_game.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import util.Gelds
 import util.toHumanReadableString
@@ -53,10 +58,17 @@ fun Screen() {
             val gameState: GameState? by viewModel.gameState.collectAsState()
             val currentMoney: Gelds? by remember(gameState) {
                 derivedStateOf { gameState?.stashedMoney }
+
+
             }
 
 
-
+            Image(
+                painterResource(Res.drawable.Backrgou),
+                contentDescription = "A square",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxWidth().fillMaxHeight(). fillMaxSize()
+            )
 
 
 
@@ -78,7 +90,7 @@ fun Screen() {
                     Text("Definitiv")
                 }
                 Text(
-                    "Data Thieves",
+                    "Data Thieves", color=Color.Green,
                     style = MaterialTheme.typography.h1,
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -99,9 +111,13 @@ fun Screen() {
                     )
                     Button(
                         onClick = { viewModel.clickMoney(state) },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray, contentColor = Color.White)
-                    ) {
-                        Text("Collect Data")
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray, contentColor = Color.White))
+                        {
+                        Text("Collect Data",
+                            modifier = Modifier.offset(
+                                x = 5.dp, y = 50.dp
+                            ).width(100.dp).height(100.dp)
+                        )
                     }
 
                     state.availableJobs.forEach { availableJob ->
@@ -145,7 +161,10 @@ private fun Generator(
             Text("Duration: ${gameJob.level.duration.inWholeSeconds} Seconds")
         }
         if (!alreadyBought) {
-            Button(onClick = onBuy) {
+            Button(
+                onClick = onBuy,
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0, 255, 0), contentColor = Color.White)
+                ) {
                 Text("Purchase")
             }
         } else {
