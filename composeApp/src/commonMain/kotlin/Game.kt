@@ -13,11 +13,12 @@ data class GameState(
     internal val stashedMoney: Gelds,
     val workers: List<GameWorker>,
     val availableJobs: List<GameJob> = listOf(
-        GameJob(1, Level(1, 10.gelds, 1.gelds, 1.seconds)),
-        GameJob(2, Level(1, 50.gelds, 10.gelds, 1.seconds)),
-        GameJob(3, Level(1, 250.gelds, 50.gelds, 1.seconds)),
-        GameJob(4, Level(1, 500.gelds, 250.gelds, 1.seconds)),
-        GameJob(5, Level(1, 1000.gelds, 500.gelds, 1.seconds))
+        // id, level, kosten, einkommen, dauer
+        GameJob(1, Level(1, 10.gelds, 1.gelds, 1.seconds), "Auto Clicker"),
+        GameJob(2, Level(1, 50.gelds, 10.gelds, 1.seconds), "Website"),
+        GameJob(3, Level(1, 250.gelds, 50.gelds, 1.seconds), "Code"),
+        GameJob(4, Level(1, 500.gelds, 250.gelds, 1.seconds), "Computer"),
+        GameJob(5, Level(1, 1000.gelds, 500.gelds, 1.seconds), "Server Room")
     ),
 )
 
@@ -37,6 +38,7 @@ data class GameWorker(
 data class GameJob(
     val id: Int,
     val level: Level,
+    val name: String
 )
 
 @Serializable
