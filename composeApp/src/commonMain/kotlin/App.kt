@@ -123,7 +123,7 @@ fun Screen() {
                     )
                     Button(
                         onClick = { viewModel.clickMoney(state) },
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray, contentColor = Color.White),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray, contentColor = Color.White),
                         modifier = Modifier.offset(x = 600.dp, y = 0.dp)
                     )
 
@@ -132,7 +132,8 @@ fun Screen() {
                             "Collect Data",
                             modifier = Modifier.offset(
                                 x = 5.dp, y = 50.dp
-                            ).width(100.dp).height(100.dp)
+                            ).width(100.dp).height(100.dp),
+
                         )
                     }
 
